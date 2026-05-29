@@ -3,32 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Tasa de desocupación Colombia</title>
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <style>
     body {
         font-family: Arial, sans-serif;
         background: #ffffff;
         margin: 40px;
     }
-
     .container {
         max-width: 1100px;
         margin: auto;
     }
-
     h2 {
         color: #111;
         margin-bottom: 5px;
     }
-
     .sub {
         color: #E0002A;
         font-weight: bold;
         margin-bottom: 20px;
     }
-
     .box {
         background: #fafafa;
         border: 1px solid #eee;
@@ -37,23 +31,15 @@
     }
 </style>
 </head>
-
 <body>
-
 <div class="container">
-
     <h2>Tasa de desocupación (TD) desestacionalizada</h2>
     <div class="sub">Colombia – Total nacional vs 13 ciudades y áreas metropolitanas (2021–2026)</div>
-
     <div class="box">
         <canvas id="chart"></canvas>
     </div>
-
 </div>
-
 <script>
-
-// 📅 TODOS los meses completos (61 puntos: abr-21 a abr-26)
 const labels = [
 "abr-21","may-21","jun-21","jul-21","ago-21","sep-21","oct-21","nov-21","dic-21",
 "ene-22","feb-22","mar-22","abr-22","may-22","jun-22","jul-22","ago-22","sep-22","oct-22","nov-22","dic-22",
@@ -63,24 +49,24 @@ const labels = [
 "ene-26","feb-26","mar-26","abr-26"
 ];
 
-// 🔴 Nacional (61 valores)
+// TD Total nacional
 const nacional = [
-15.3,14.9,14.6,13.0,12.9,13.2,13.4,12.9,13.0,
-12.0,12.2,11.8,11.6,11.0,10.5,11.2,11.0,11.6,10.6,10.8,11.3,
-10.3,9.5,10.1,10.7,9.4,9.7,10.0,9.7,10.2,10.4,10.1,10.3,
-10.0,10.2,10.1,10.4,10.1,10.1,9.9,9.6,9.4,9.6,9.1,9.0,
-8.8,8.9,8.8,8.7,8.8,8.9,8.8,8.7,8.6,8.5,8.4,8.7,
-8.8,8.7,8.7,8.7
+15.3,14.9,14.6,13.0,13.4,13.2,13.2,12.0,12.2,
+12.0,11.8,11.6,11.0,10.5,10.6,10.6,11.0,11.1,10.9,11.0,11.3,
+11.3,10.3,10.3,9.5,8.7,9.7,9.7,9.7,10.0,10.1,10.1,10.2,
+10.5,10.2,10.3,10.6,10.7,10.1,9.9,9.6,10.2,10.1,10.1,9.9,
+9.6,9.5,9.4,9.1,8.8,8.9,8.8,8.4,8.4,8.1,8.3,8.1,
+8.4,8.5,8.7,8.7
 ];
 
-// 🔵 13 ciudades (61 valores)
+// TD 13 ciudades y A.M.
 const ciudades = [
 17.4,16.5,16.0,14.8,13.8,14.0,14.1,14.0,12.6,
-12.0,11.9,12.3,11.0,11.1,11.6,11.2,11.0,11.2,10.8,10.6,11.6,
+12.6,11.9,12.3,11.9,12.3,11.6,11.2,11.0,11.2,10.8,10.6,11.6,
 11.3,10.7,11.0,12.2,10.1,10.7,11.1,9.4,9.7,9.9,10.1,10.0,
-10.4,10.7,10.8,10.3,10.5,10.2,10.4,10.1,10.0,9.9,9.6,9.6,
-9.4,9.2,9.4,9.1,8.9,8.8,9.0,9.0,8.9,8.8,8.6,8.5,
-8.9,8.8,8.8,8.8
+10.4,10.8,10.7,10.3,10.5,10.2,10.4,10.1,10.0,9.9,9.6,9.9,
+9.9,9.2,9.4,9.1,8.9,8.8,9.0,9.0,8.9,8.8,8.6,8.5,
+8.8,8.5,9.0,8.8
 ];
 
 new Chart(document.getElementById('chart'), {
@@ -89,20 +75,22 @@ new Chart(document.getElementById('chart'), {
         labels: labels,
         datasets: [
             {
-                label: 'Total nacional',
+                label: 'TD total nacional',
                 data: nacional,
-                borderColor: '#111111',
-                backgroundColor: 'rgba(17,17,17,0.08)',
+                borderColor: '#4a1942',
+                backgroundColor: 'rgba(74,25,66,0.08)',
                 tension: 0.35,
-                pointRadius: 2
+                pointRadius: 2,
+                pointStyle: 'rect'
             },
             {
-                label: '13 ciudades y A.M.',
+                label: 'TD 13 ciudades y A.M.',
                 data: ciudades,
-                borderColor: '#E0002A',
-                backgroundColor: 'rgba(224,0,42,0.08)',
+                borderColor: '#e0006e',
+                backgroundColor: 'rgba(224,0,110,0.08)',
                 tension: 0.35,
-                pointRadius: 2
+                pointRadius: 2,
+                pointStyle: 'rectRot'
             }
         ]
     },
@@ -113,24 +101,22 @@ new Chart(document.getElementById('chart'), {
             intersect: false
         },
         plugins: {
-            tooltip: {
-                enabled: true
-            },
-            legend: {
-                position: 'top'
-            }
+            tooltip: { enabled: true },
+            legend: { position: 'bottom' }
         },
         scales: {
             y: {
+                min: 6,
+                max: 26,
+                ticks: { stepSize: 2 },
                 title: {
                     display: true,
-                    text: 'Tasa de desocupación (%)'
+                    text: 'TD (%)'
                 }
             }
         }
     }
 });
 </script>
-
 </body>
 </html>
