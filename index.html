@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Tasa de desocupación Colombia</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        margin: 40px;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    h2 {
+        color: #111;
+        margin-bottom: 5px;
+    }
+
+    .sub {
+        color: #E0002A;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .box {
+        background: #fafafa;
+        border: 1px solid #eee;
+        padding: 20px;
+        border-radius: 10px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Tasa de desocupación (TD) desestacionalizada</h2>
+    <div class="sub">Colombia – Total nacional vs 13 ciudades y áreas metropolitanas (2021–2026)</div>
+
+    <div class="box">
+        <canvas id="chart"></canvas>
+    </div>
+
+</div>
+
+<script>
+
+// 📅 TODOS los meses completos (61 puntos: abr-21 a abr-26)
+const labels = [
+"abr-21","may-21","jun-21","jul-21","ago-21","sep-21","oct-21","nov-21","dic-21",
+"ene-22","feb-22","mar-22","abr-22","may-22","jun-22","jul-22","ago-22","sep-22","oct-22","nov-22","dic-22",
+"ene-23","feb-23","mar-23","abr-23","may-23","jun-23","jul-23","ago-23","sep-23","oct-23","nov-23","dic-23",
+"ene-24","feb-24","mar-24","abr-24","may-24","jun-24","jul-24","ago-24","sep-24","oct-24","nov-24","dic-24",
+"ene-25","feb-25","mar-25","abr-25","may-25","jun-25","jul-25","ago-25","sep-25","oct-25","nov-25","dic-25",
+"ene-26","feb-26","mar-26","abr-26"
+];
+
+// 🔴 Nacional (61 valores)
+const nacional = [
+15.3,14.9,14.6,13.0,12.9,13.2,13.4,12.9,13.0,
+12.0,12.2,11.8,11.6,11.0,10.5,11.2,11.0,11.6,10.6,10.8,11.3,
+10.3,9.5,10.1,10.7,9.4,9.7,10.0,9.7,10.2,10.4,10.1,10.3,
+10.0,10.2,10.1,10.4,10.1,10.1,9.9,9.6,9.4,9.6,9.1,9.0,
+8.8,8.9,8.8,8.7,8.8,8.9,8.8,8.7,8.6,8.5,8.4,8.7,
+8.8,8.7,8.7,8.7
+];
+
+// 🔵 13 ciudades (61 valores)
+const ciudades = [
+17.4,16.5,16.0,14.8,13.8,14.0,14.1,14.0,12.6,
+12.0,11.9,12.3,11.0,11.1,11.6,11.2,11.0,11.2,10.8,10.6,11.6,
+11.3,10.7,11.0,12.2,10.1,10.7,11.1,9.4,9.7,9.9,10.1,10.0,
+10.4,10.7,10.8,10.3,10.5,10.2,10.4,10.1,10.0,9.9,9.6,9.6,
+9.4,9.2,9.4,9.1,8.9,8.8,9.0,9.0,8.9,8.8,8.6,8.5,
+8.9,8.8,8.8,8.8
+];
+
+new Chart(document.getElementById('chart'), {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [
+            {
+                label: 'Total nacional',
+                data: nacional,
+                borderColor: '#111111',
+                backgroundColor: 'rgba(17,17,17,0.08)',
+                tension: 0.35,
+                pointRadius: 2
+            },
+            {
+                label: '13 ciudades y A.M.',
+                data: ciudades,
+                borderColor: '#E0002A',
+                backgroundColor: 'rgba(224,0,42,0.08)',
+                tension: 0.35,
+                pointRadius: 2
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        interaction: {
+            mode: 'index',
+            intersect: false
+        },
+        plugins: {
+            tooltip: {
+                enabled: true
+            },
+            legend: {
+                position: 'top'
+            }
+        },
+        scales: {
+            y: {
+                title: {
+                    display: true,
+                    text: 'Tasa de desocupación (%)'
+                }
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>
