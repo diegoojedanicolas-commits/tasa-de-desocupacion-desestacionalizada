@@ -14,15 +14,8 @@
         max-width: 1100px;
         margin: auto;
     }
-    h2 {
-        color: #111;
-        margin-bottom: 5px;
-    }
-    .sub {
-        color: #E0002A;
-        font-weight: bold;
-        margin-bottom: 20px;
-    }
+    h2 { color: #111; margin-bottom: 5px; }
+    .sub { color: #E0002A; font-weight: bold; margin-bottom: 20px; }
     .box {
         background: #fafafa;
         border: 1px solid #eee;
@@ -49,17 +42,15 @@ const labels = [
 "ene-26","feb-26","mar-26","abr-26"
 ];
 
-// TD Total nacional
 const nacional = [
 15.3,14.9,14.6,13.0,13.4,13.2,13.2,12.0,12.2,
 12.0,11.8,11.6,11.0,10.5,10.6,10.6,11.0,11.1,10.9,11.0,11.3,
 11.3,10.3,10.3,9.5,8.7,9.7,9.7,9.7,10.0,10.1,10.1,10.2,
 10.5,10.2,10.3,10.6,10.7,10.1,9.9,9.6,10.2,10.1,10.1,9.9,
 9.6,9.5,9.4,9.1,8.8,8.9,8.8,8.4,8.4,8.1,8.3,8.1,
-8.4,8.5,8.7,8.7
+8.7,8.4,8.4,8.7
 ];
 
-// TD 13 ciudades y A.M.
 const ciudades = [
 17.4,16.5,16.0,14.8,13.8,14.0,14.1,14.0,12.6,
 12.6,11.9,12.3,11.9,12.3,11.6,11.2,11.0,11.2,10.8,10.6,11.6,
@@ -96,10 +87,7 @@ new Chart(document.getElementById('chart'), {
     },
     options: {
         responsive: true,
-        interaction: {
-            mode: 'index',
-            intersect: false
-        },
+        interaction: { mode: 'index', intersect: false },
         plugins: {
             tooltip: { enabled: true },
             legend: { position: 'bottom' }
@@ -109,10 +97,7 @@ new Chart(document.getElementById('chart'), {
                 min: 6,
                 max: 26,
                 ticks: { stepSize: 2 },
-                title: {
-                    display: true,
-                    text: 'TD (%)'
-                }
+                title: { display: true, text: 'TD (%)' }
             }
         }
     }
